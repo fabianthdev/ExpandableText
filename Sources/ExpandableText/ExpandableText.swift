@@ -40,54 +40,56 @@ public struct ExpandableText: View {
                     Text(text)
                 }
             }
-                .font(font)
-                .foregroundColor(foregroundColor)
-                .lineLimit(expand == true ? nil : lineLimit)
-                .animation(animation, value: expand)
-                .mask(
-                    VStack(spacing: 0){
+            .font(font)
+            .foregroundColor(foregroundColor)
+            .lineLimit(expand == true ? nil : lineLimit)
+            .animation(animation, value: expand)
+            .mask(
+                VStack(spacing: 0){
+                    Rectangle()
+                        .foregroundColor(.black)
+
+                    HStack(spacing: 0){
                         Rectangle()
                             .foregroundColor(.black)
-                        
-                        HStack(spacing: 0){
-                            Rectangle()
-                                .foregroundColor(.black)
-                            if truncated{
-                                if !expand {
-                                    HStack(alignment: .bottom,spacing: 0){
-                                        LinearGradient(
-                                            gradient: Gradient(stops: [
-                                                Gradient.Stop(color: .black, location: 0),
-                                                Gradient.Stop(color: .clear, location: 0.8)]),
-                                            startPoint: .leading,
-                                            endPoint: .trailing)
-                                            .frame(width: 32, height: expandButton.text.heightOfString(usingFont: fontToUIFont(font: expandButton.font)))
-                                        
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: expandButton.text.widthOfString(usingFont: fontToUIFont(font: expandButton.font)), alignment: .center)
-                                    }
+                        if truncated{
+                            if !expand {
+                                HStack(alignment: .bottom,spacing: 0){
+                                    LinearGradient(
+                                        gradient: Gradient(stops: [
+                                            Gradient.Stop(color: .black, location: 0),
+                                            Gradient.Stop(color: .clear, location: 0.8)
+                                        ]),
+                                        startPoint: .leading,
+                                        endPoint: .trailing)
+                                    .frame(width: 32, height: expandButton.text.heightOfString(usingFont: fontToUIFont(font: expandButton.font)))
+
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: expandButton.text.widthOfString(usingFont: fontToUIFont(font: expandButton.font)), alignment: .center)
                                 }
-                                else if let collapseButton = collapseButton {
-                                    HStack(alignment: .bottom,spacing: 0){
-                                        LinearGradient(
-                                            gradient: Gradient(stops: [
-                                                Gradient.Stop(color: .black, location: 0),
-                                                Gradient.Stop(color: .clear, location: 0.8)]),
-                                            startPoint: .leading,
-                                            endPoint: .trailing)
-                                            .frame(width: 32, height: collapseButton.text.heightOfString(usingFont: fontToUIFont(font: collapseButton.font)))
-                                        
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: collapseButton.text.widthOfString(usingFont: fontToUIFont(font: collapseButton.font)), alignment: .center)
-                                    }
+                            }
+                            else if let collapseButton = collapseButton {
+                                HStack(alignment: .bottom,spacing: 0){
+                                    LinearGradient(
+                                        gradient: Gradient(stops: [
+                                            Gradient.Stop(color: .black, location: 0),
+                                            Gradient.Stop(color: .clear, location: 0.8)
+                                        ]),
+                                        startPoint: .leading,
+                                        endPoint: .trailing)
+                                    .frame(width: 32, height: collapseButton.text.heightOfString(usingFont: fontToUIFont(font: collapseButton.font)))
+
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: collapseButton.text.widthOfString(usingFont: fontToUIFont(font: collapseButton.font)), alignment: .center)
                                 }
                             }
                         }
-                        .frame(height: expandButton.text.heightOfString(usingFont: fontToUIFont(font: font)))
                     }
-                )
+                    .frame(height: expandButton.text.heightOfString(usingFont: fontToUIFont(font: font)))
+                }
+            )
             
             if truncated {
                 if let collapseButton = collapseButton {
